@@ -3,50 +3,62 @@
   <head>
     <title>Yewspine's website</title>
     <link rel="stylesheet" href="./style/main.css">
+    <link rel="stylesheet" href="./style/button.css">
+    <link rel="stylesheet" href="./style/summary.css">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
   </head>
+  <header>
+    <h1 id="top">Welcome there</h1>
+    <p><em>We do not have that much visitor here. Hope you'll find something you like here</em></p>
+  </header>
   <body>
-    <main>
-      <h1 id="top">Welcome there</h1>
-      <p><em>We do not have that much visitor here. Hope you'll find something you like here</em></p>
-      <nav>
-        <p>Jump table</p>
-        <ol>
-          <li><a href="#main">About me</a></li>
-          <li><a href="#network">Connect with me</a></li>
-          <li>
-            <a href="#project">My projects</a>
-            <ul>
-              <li><a href="#project-visualizer">Algorithm visualizer</a></li>
-              <li><a href="#project-vimMotion">VimMotion</a></li>
-            </ul>
-          </li>
-          <li><a href="#legal">Legal Notice</a></li>
-        </ol>
-      </nav>
-      <span id="main">
-        <h2>Who am I ?</h2>
-        <p>Nothing for now, but I promise I'm building the palace</p> 
-      </span>
+    <nav>
+      <p id="summary-title">Jump table</p>
       <hr/>
-      <span id="network">
+      <ol>
+        <li><a href="#main">About me</a></li>
+        <li><a href="#network">Connect with me</a></li>
+        <li>
+          <a href="#project">My projects</a>
+          <ul>
+            <li><a href="#project-visualizer">Algorithm visualizer</a></li>
+            <li><a href="#project-vimMotion">VimMotion</a></li>
+          </ul>
+        </li>
+        <li><a href="#legal">Legal Notice</a></li>
+      </ol>
+    </nav>
+    <main>
+      <section id="main">
+        <h2>Who am I ?</h2>
+        <ul>
+          <li><b>Name</b>: Riley</li>
+          <li><b>Pronouns</b>: She/Her</li>
+          <li>Litterature fan, nerd, developer and mathematics enjoyer</li>
+        </ul>
+        <a href="pages/book.html" class="button-link">Books I Want to read</a>
+        <a href="#" class="button-link">Stuff I found on the internet</a>
+      </section>
+      <hr/>
+      <section id="network">
         <h2>Where can you find me ?</h2>
         <ul>
           <li><a target="_blank" rel="noopener" href=https://github.com/Yewspine>GitHub</a></li>
         </ul>
-      </span>
+      </section>
       <hr />
-      <span id="project" >
+      <section id="project" >
         <h2>What did I do so far ?</h2>
         <article id="project-visualizer">
           <h3>Algorithm Visualizer</h3>
           <a target="_blank" rel="noopener" href="https://github.com/Yewspine/Algo-Visualizer">Link to the repo</a>
           <h4>Description</h4>
           <p>
-            A software made for educationnal purpose. It's aimed to be used by student or curious people learning about algorithm.
+            A software made for educational purpose. It's aimed to be used by student or curious people learning about algorithm.
             This program will display the implementation of various algorithm in different popular languages, then run the programm step by step.
-            In order to help people having a better understandinf of the implementation, and the logic behind the algorithm, 
+            <br/><br/>
+            In order to help people having a better understanding of the implementation, and the logic behind the algorithm, 
             the software will also plot a graphical representation of those instructions. 
           </p>
           <h4>Stack</h4>
@@ -63,8 +75,10 @@
           <h4>Description</h4>
           <p>
             I do not like how Discord forces the user to navigate in the app using scrolling, I prefer using vim keybind.
-            This is exactly what this plugins do, using the Vencord API, I added a new behavior to Discord, making it possible to navigate in a channel using j and k keys.
-            I plan to add more features, like a tooltip to inform the user he's current mode ( normal, or insert mode ) Because after using it, you can forget easily that you are in normal mode and therefore, unable to type.
+            This is exactly what this plugins does using the Vencord API.
+            <br/><br/>
+            I added a new behavior to Discord, making it possible to navigate in a channel using j and k keys.
+            I plan to add more features, like a tooltip to inform the user their current mode ( normal, or insert mode ). 
           </p>
           <h4>Stack</h4>
           <ul>
@@ -72,14 +86,14 @@
             <li>Vencord API</li>
           </ul>
         </article>
-      </span>
+      </section>
     </main>
   </body>
   <footer id="legal">
     <hr/>
     <p>This website does not track you, does not collect your data, does not use any cookies, does not include any JavaScript snippet.</p>
-    <p>This website have been made by Yewspine, a human being. Meaning NO AI, LLM, GPT, etc has been used while making this website.</p>
+    <p>This website has been made by Yewspine, a human being. Meaning NO AI, LLM, GPT, etc has been used while making this website.</p>
     <p>This website <a target="_blank" rel="noopener" href="https://github.com/Yewspine/Yewspine.github.io">source code</a> and content is under the <a target="_blank" rel="noopener" href=https://creativecommons.org/publicdomain/zero/1.0/deed.en>CC0-1.0 License<a></p>
-    <a href="#top">Scroll to top</a>
+    <a href="#top">Jump to top</a>
   </footer>
 </html>
