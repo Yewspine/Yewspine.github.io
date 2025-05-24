@@ -1,0 +1,28 @@
+nav
+{
+  padding: 5px;
+  margin: 5px;
+  height: auto;
+  width: 20vw;
+}
+
+#summary-title
+{
+  margin: 15px;
+  font-size: 20px;
+}
+
+nav
+{
+  background-color: #21252B; 
+  border: 1px solid #fff 
+}
+
+@media (max-width: 768px) 
+{
+  nav 
+  {
+    width: 75%; 
+  }
+}
+
