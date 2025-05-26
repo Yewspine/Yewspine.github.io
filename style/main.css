@@ -1,6 +1,5 @@
 :root
 {
-  -ms-overflow-style: none;
   scrollbar-width: none;
   --background-color: #1F1E1E;
   --text-color: #FFF;
@@ -13,6 +12,21 @@ html
   background-color: var(--background-color);
   color: var(--text-color);
   font-family: Arial, sans-serif;
+}
+
+body
+{
+  margin: 0;
+}
+
+#subtitle
+{
+  font-style: italic;
+}
+
+header#introduction, main
+{
+  margin: 8px;
 }
 
 p
