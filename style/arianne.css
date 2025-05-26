@@ -1,12 +1,12 @@
-body
+.arianne
 {
-  margin: 0;
+  overflow: hidden;
+  background-color: #111;
 }
 
 .arianne ul
 {
   list-style-type: none; 
-  background-color: #111;
 }
 
 .arianne li
