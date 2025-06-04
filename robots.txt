@@ -1,3 +1,10 @@
-User-agent: *
+User-Agent: *
 Disallow: /style
 Disallow: /script
+User-Agent: OAI-SearchBot
+Disallow: /
+User-Agent: GPTBot
+Disallow: /
+User-Agent: CCBot
+Disallow: /
+
