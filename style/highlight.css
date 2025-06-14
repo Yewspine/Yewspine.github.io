@@ -1,0 +1,54 @@
+pre {
+  display: inline-block;
+  padding: 15px 15px;
+  background-color: #0f0f0f; 
+  font-family: "fira code", monospace;
+  font-size: 15px;
+}
+
+pre code {
+  display: inline; 
+  margin: 0;
+  padding: 0;
+}
+
+.comment 
+{
+  font-weight: italic;
+  color: #8a8686;
+}
+
+.key
+{
+  color: #ff91f8;
+}
+
+.keyword
+{
+  color: #e83f2c;
+}
+
+.type
+{
+  color: #3484ed; 
+}
+
+.class
+{
+  color: #46cf64;
+}
+
+.decorator
+{
+  color: #cb6df7;
+}
+
+.integer
+{
+  color: #ed5d1f;
+}
+
+.string 
+{
+  color: #dea60d;
+}

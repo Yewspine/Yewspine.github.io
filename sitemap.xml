@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 <url>
   <loc>https://yewspine.github.io/</loc>
-  <lastmod>2025-05-24T22:57:52+00:00</lastmod>
+  <lastmod>2025-06-14T16:05:50+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
@@ -14,4 +14,10 @@
   <loc>https://yewspine.github.io/Algo-Visualizer</loc>
   <lastmod>2025-06-06T10:08:50+00:00</lastmod>
   <priority>0.01</priority>
+</url>
+<url>
+  <loc>https://yewspine.github.io/pages/projects/visualizer.html</loc>
+  <lastmod>2025-06-14T16:05:50+00:00</lastmod>
+  <priority>0.90</priority>
+</url>
 </urlset>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Yewspine's website - Visualizer</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../style/main.css">
+    <link rel="stylesheet" href="../../style/summary.css">
+    <link rel="stylesheet" href="../../style/arianne.css">
+    <link rel="stylesheet" href="../../style/footer.css">
+    <link rel="stylesheet" href="../../style/highlight.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+  </head>
+  <body>
+    <header class="arianne" id="top">
+      <ul>
+        <li><a href="../../index.html">Main view</a></li> 
+        <svg alt="" xmlns="http://www.w3.org/2000/svg" width="20" height="15" viewBox="0 0 384 512">
+          <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+          <path d="M3.4 81.7c-7.9 15.8-1.5 35 14.3 42.9L280.5 256 17.7 387.4C1.9 395.3-4.5 414.5 3.4 430.3s27.1 22.2 42.9 14.3l320-160c10.8-5.4 17.7-16.5 17.7-28.6s-6.8-23.2-17.7-28.6l-320-160c-15.8-7.9-35-1.5-42.9 14.3z" fill="white" stroke="white"/>
+        </svg>
+        <li><a href=#>Visualizer</a></li>
+      </ul>
+    </header>
+    <nav>
+      <p id="summary-title">Jump table</p>
+      <hr>
+      <ol> 
+        <li><a target="_self" href="#introduction">Introduction</a></li>
+        <li>
+          <a target="_self" href="#timeline">Timeline</a>
+          <ul>
+            <a target="_self" href="#first">The beginning</a>
+          </ul>
+        </li>
+        <li><a target="_self" href="#legal">Legal Notice</a></li>
+      </ol>
+    </nav>
+    <main>
+      <h1>Algorithm Visualizer</h1>
+      <section id="introduction">
+        <h2>Introduction</h2> 
+        <article>
+          <p>This project is born from the need I had when I discovered algorithm, the need to see the algorithm actions to understand them. At the time there was not that much of options to pick from. Even if today, there is plenty of those, <em>especially the great <a target="_blank" rel="noopener" href="https://tobinatore.github.io">Algovis.io (Open in a new tab)</a></em>. So my goal is to provide a complete educational tool, portable for almost every platform and efficient. Getting inspiration from the smooth animation of the YouTuber <a target="_blank" href="https://www.youtube.com/@CodeAesthetic">CodeAesthetic ( Open Youtube in a new tab )</a>.</p>
+          <p>Regularly, after each major updates, I will update this blog page. Stay tuned, I will create a RSS feed when I have time.
+          <p>Posts appear in chronological order. <a aria-label="Navigate to the latest post" href="#last">Take me to the last update !</a></p>
+        </article>
+      </section>
+      <hr>
+      <section id="timeline">
+        <h2>Timeline</h2>
+        <article id=#first>
+          <h3>The Beginning</h3>
+          <p>After thinking about it, I chose to start this project using Java. I like Java, this is a robust and powerful language. Furthermore, since it rely on JWM and bytecode to compile, it makes it portable for almost any machines. Unless I use some OS-specific instruction, which might not happen since I do not plan to manipulate some Windows Register or touch Apple-exclusive features.</p>
+          <p>I decided to use Maven as a project manager since I already have used it for some prior in personnal projects. As for the coding environment, I don't like IDE, they are too much bloat and overhead to use. So I sticked my good old Nvim.</p>
+          <p>Alongside the basic <code>Jlink</code> to automatically distribute the application, <code>README.md</code> and <code>.gitignore</code> file. I pushed a basic JavaFX Project, Why JavaFX ? Because compared to Swing it is actively maintained and is used in most internal company software.
+          <p>At the moment the main code looked like this :</p>
+          <pre><code><span class="keyword">package</span> com.visualizer;
+
+<span class="keyword">import</span> javafx.application.Application;
+<span class="keyword">import</span> javafx.scene.Scene;
+<span class="keyword">import</span> javafx.scene.control.Label;
+<span class="keyword">import</span> javafx.scene.layout.StackPane;
+<span class="keyword">import</span> javafx.stage.Stage;
+
+<span class="comment">
+/**
+* JavaFX App
+*/
+</span>
+<span class="keyword">public class</span> <span class="class">App</span> <span class="keyword">extends</span> Application 
+{
+
+  <span class="decorator">@Override</span>
+  <span class="keyword">public void</span> start(<span class="type">Stage</span> stage) 
+  {
+    <span class="keyword">var</span> javaVersion = SystemInfo.javaVersion();
+    <span class="keyword">var</span> javafxVersion = SystemInfo.javafxVersion();
+
+    <span class="keyword">var</span> label = <span class="keyword">new</span> Label(<span class="string">"Hello, JavaFX "</span> + javafxVersion + <span class="string">", running on Java "</span> + javaVersion + <span class="string">"."</span>);
+    <span class="keyword">var</span> scene = <span class="keyword">new</span> Scene(<span class="keyword">new</span> StackPane(label), <span class="integer">640</span>, <span class="integer">480</span>);
+    stage.setScene(scene);
+    stage.show();
+  }
+
+  <span class="keyword">public static void</span> main(<span class="type">String[]</span> args) 
+  {
+    launch();
+  }
+}</code></pre>
+          <p> A standard application displaying the JavaFX and JDK version. Small spoiler, those functions are still in the latest project for debugging purpose</p>
+          <p> By default I also included the default Github Action for Maven project. It compile the project, to detect any failure in the code and check for any issues in the depedencies of the project</p>
+          <p> The Github Action script is the following:</p>
+<pre><code><span class="comment"># This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.</span>
+
+<span class="key">name:</span> <span class="string">Java CI with Maven</span>
+
+<span class="key">on:
+  push:
+    branches:</span> [ <span class="string">"main"</span> ]
+  <span class="key">pull_request:
+    branches:</span> [ <span class="string">"main"</span> ]
+
+<span class="key">jobs:
+  build:
+
+    runs-on:</span> <span class="string">ubuntu-latest</span>
+
+    <span class="key">steps:
+    - uses:</span> <span class="string">actions/checkout@v4</span>
+    <span class="key">- name:</span> <span class="string">Set up JDK 22</span>
+      <span class="key">uses:</span> <span class="string">actions/setup-java@v4</span>
+      <span class="key">with:
+        java-version:</span> <span class="string">'22'</span>
+        <span class="key">distribution:</span> <span class="string">'temurin'</span>
+        <span class="key">cache:</span> <span class="string">maven</span>
+    <span class="key">- name:</span> <span class="string">Build with Maven</span>
+      <span class="key">run:</span> <span class="string">mvn -B package --file pom.xml</span>
+
+    <span class="comment"># Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive</span>
+    <span class="key">- name:</span> <span class="string">Update dependency graph</span>
+      <span class="key">uses:</span> <span class="string">advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6</span></code></pre>
+          <p>However, since the Github Action kept throwing an error during the upload of the dependency graph, I commented this part out and created a branch to debug this workflow.</p>
+        </article>
+        <article id="#last">
+        <a aria-label="Navigate to the first blog post" href="#first">Bring me to first post !</a>
+        </article>
+      </section>
+    </main>
+  </body>
+  <footer>
+    <section id="legal">
+      <p>This website does not track you, does not collect your data, does not use any cookies, only use strictly necessary JavaScript snippet.</p>
+      <p>This website has been made by Yewspine, a human being. Meaning NO AI, LLM, GPT, etc has been used while making this website.</p>
+      <p>This website <a target="_blank" rel="noopener" href="https://github.com/Yewspine/Yewspine.github.io">source code</a> and content is under the <a target="_blank" rel="noopener" href=https://creativecommons.org/publicdomain/zero/1.0/deed.en>CC0-1.0 License</a></p>
+    </section>
+    <a target="_top" href="#top">Jump to top</a>
+  </footer>
+</html>
