@@ -3,7 +3,7 @@ pre {
   padding: 15px 15px;
   background-color: #0f0f0f; 
   font-family: "fira code", monospace;
-  font-size: 15px;
+  font-size: var(--code-font-size);
 }
 
 pre code {

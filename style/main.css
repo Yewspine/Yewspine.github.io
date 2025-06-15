@@ -3,8 +3,10 @@
   scrollbar-width: none;
   --background-color: #1F1E1E;
   --text-color: #FFF;
+  --code-font-size: 15px;
   --visited-link-color: #CD9DCD;
-  --link-color: #E3C0CA
+  --link-color: #E3C0CA;
+  --max-paragraph-width: 110ch;
 }
 
 html
@@ -33,7 +35,7 @@ p
 {
   text-align: left;
   line-height: 1.6;
-  max-width: 110ch;
+  max-width: var(--max-paragraph-width);
 }
 
 a
@@ -46,3 +48,4 @@ a:visited
 {
   color: var(--visited-link-color);
 }
+
