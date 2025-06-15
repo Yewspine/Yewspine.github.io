@@ -3,12 +3,14 @@
   <head>
     <title>Yewspine's website - Visualizer</title>
     <meta charset="UTF-8">
+    <link rel="preload" href="../../style/highlight.css" as="style">
+    
     <link rel="stylesheet" href="../../style/main.css">
     <link rel="stylesheet" href="../../style/summary.css">
     <link rel="stylesheet" href="../../style/arianne.css">
     <link rel="stylesheet" href="../../style/footer.css">
-    <link rel="stylesheet" href="../../style/highlight.css">
     <link rel="stylesheet" href="../../style/table.css">
+    <link rel="stylesheet" href="../../style/highlight.css">
     <link rel="stylesheet" href="../../style/responsive.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
   </head>
@@ -33,6 +35,7 @@
           <ul>
             <li><a target="_self" href="#first">The beginning</a></li>
             <li><a target="_self" href="#architecture">MVVM Implementation</a></li>
+            <li><a target="_self" href="#reflection">The Reflection Algorithm</a></li>
           </ul>
         </li>
         <li><a target="_self" href="#legal">Legal Notice</a></li>
@@ -53,10 +56,13 @@
         <h2>Timeline</h2>
         <article id=#first>
           <h3>The Beginning</h3>
-          <p>After thinking about it, I chose to start this project using Java. I like Java, this is a robust and powerful language. Furthermore, since it rely on JWM and bytecode to compile, it makes it portable for almost any machines. Unless I use some OS-specific instruction, which might not happen since I do not plan to manipulate some Windows Register or touch Apple-exclusive features.</p>
-          <p>I decided to use Maven as a project manager since I already have used it for some prior in personnal projects. As for the coding environment, I don't like IDE, they are too much bloat and overhead to use. So I sticked my good old Nvim.</p>
-          <p>Alongside the basic <code>Jlink</code> to automatically distribute the application, <code>README.md</code> and <code>.gitignore</code> file. I pushed a basic JavaFX Project, Why JavaFX ? Because compared to Swing it is actively maintained and is used in most internal company software.
-          <p>At the moment the main code looked like this :</p>
+          <p>After thinking about it, I chose to start this project using Java. I like Java, for its robusteness and power. Furthermore, since it relies on JVM to compiles to bytecodes, it makes it portable for almost any machines. Unless I use some OS-specific instruction, which might not happen since I do not plan to manipulate some Windows Register or MacOS-exclusive features.</p>
+          <p>I decided to use Maven as a project manager, since I already have used it for some prior personnal projects. In addition Gradle has a lot of features I won't even need for this project, like the customization using the Groovy DSL from Gradle. This DSL is really good, but I just need to manage dependencies, therefore the POM file of Maven does exactly that. It also provides templates and downloads dependencies, which allow me to quickly hope into the project.</p>
+          <p>As for the coding environment, I don't like IDEs, they are too much bloat and overhead to use for me. So I sticked to my good old Nvim.</p>
+          <p>The framework I decided to use is JavaFX, why JavaFX ? Because compared to Swing it is actively maintained, also its CSS-like styling makes it easier to personalise and tweak. Also, JavaFX is used in most of the internal companies software.</p>
+          <p>Other solution exists like Electron or QT. They are good, but have some drawbacks. In one hand, Electron while being based on web technologies making it more portable than JavaFX, is built using chromium tools known for their RAM and CPU consumption. In the other hand, QT use C++, which mean I have to setup a complete toolchain to target another OS. In addition, QT does not use standard C++. Thus, meaning I have to write more boilerplate code to achieve some small things, like parsing from QString to std::string to char*.</p>
+          <p>Alongside the basic <code>Jlink</code> to automatically distribute the application, <code>README.md</code> and <code>.gitignore</code> file. I pushed a basic JavaFX Project.</p>
+          <p>At the moment the main class code looked like this :</p>
           <pre><code><span class="keyword">package</span> com.visualizer;
 
 <span class="keyword">import</span> javafx.application.Application;
@@ -245,7 +251,7 @@
     language_classes.<span class="function">addAll</span>(
       <span class="constant">EMPTY_PAIR</span>,
       <span class="keyword">new</span> Pair(<span class="string">"Pascal"</span>, <span class="string">"pas"</span>),
-      <span class="keyword">new</span> Pair(<span class="string">C++"</span>, <span class="string">"cpp"</span>),
+      <span class="keyword">new</span> Pair(<span class="string">"C++"</span>, <span class="string">"cpp"</span>),
       <span class="keyword">new</span> Pair(<span class="string">"C"</span>, <span class="string">"c"</span>),
       <span class="keyword">new</span> Pair(<span class="string">"JavaScript"</span>, <span class="string">"js"</span>),
       <span class="keyword">new</span> Pair(<span class="string">"C#"</span>, <span class="string">"cs"</span>),
@@ -399,6 +405,11 @@
         <p>And this is done. The basic implementation for the the first view, fragment and Controller is done. And this is with a free mind I can continue to work on this project.</p>
 
         </ol>
+        </article>
+        <hr>
+        <article id="#reflection">
+          <h3>The Reflection Algorithm</h3>
+          <p></p>
         </article>
         <article id="#last">
         <a aria-label="Navigate to the first blog post" href="#first">Bring me to first post !</a>
