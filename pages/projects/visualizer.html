@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../../style/arianne.css">
     <link rel="stylesheet" href="../../style/footer.css">
     <link rel="stylesheet" href="../../style/highlight.css">
+    <link rel="stylesheet" href="../../style/table.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
   </head>
   <body>
@@ -29,7 +30,8 @@
         <li>
           <a target="_self" href="#timeline">Timeline</a>
           <ul>
-            <a target="_self" href="#first">The beginning</a>
+            <li><a target="_self" href="#first">The beginning</a></li>
+            <li><a target="_self" href="#architecture">MVVM Implementation</a></li>
           </ul>
         </li>
         <li><a target="_self" href="#legal">Legal Notice</a></li>
@@ -126,6 +128,276 @@
     <span class="key">- name:</span> <span class="string">Update dependency graph</span>
       <span class="key">uses:</span> <span class="string">advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6</span></code></pre>
           <p>However, since the Github Action kept throwing an error during the upload of the dependency graph, I commented this part out and created a branch to debug this workflow.</p>
+        </article>
+        <hr>
+        <article id="architecture">
+          <h3>MVVM Implementation</h3>
+          <p>In this series of commits, I implemented the Model View View Model Pattern Design in my code, using the SOLID principles. This design pattern consist of having a View that renders the UI, and a separate working logic handled by a single ViewModel.</p>
+          <p>The main differences between the MVC ( Model View Controller ) and MVVM reside in the entry point and the relationship between the UI and the working part.</p>
+          <p>Here is a table to see them:</p>
+          <table>
+            <tr>
+              <td></td>
+              <th>MVVM</th>
+              <th>MVC</th>
+            </tr>
+            <tr>
+              <th>Entry Point</th>
+              <td>View</td>
+              <td>Controller</td>
+            </tr>
+            <tr>
+              <th>Relationship</th>
+              <td>One viewModel can be bound to multiple view</td>
+              <td>One controller can be bind to multiple Views</td>
+            </tr>
+            <tr>
+              <th>Testing</th>
+              <td>Decoupling made it easier to isolate and test it</td>
+              <td>Can't be easily isolated and tested</td>
+            </tr>
+          </table>
+          <p>With that in minde, I created a generic abstract class defining a <code>FragmentView</code>. This class represent a View and it ViewModel bind to it, it is implemented as it:</p>
+<pre></code><span class="keyword">package</span> com.visualizer.View.Fragment;
+
+<span class="keyword">import</span> javafx.scene.layout.Region;
+
+<span class="comment">
+/**
+ * Abstract class defining a FragmentViewm The T generic type attend the Controller
+ * interface, For granularity and because of Interface Segregation, the T type is not 
+ * narrowed to a particular Controller Interface.
+ * <span class="decorator">@param</span> &lt;T&gt; The Controller class for the Fragment
+ * <span class="decorator">@author</span> Yewspine
+ * *
+</span>
+<span class="keyword"> public abstract class</span> <span class="class">FragmentView</span>&lt;T&gt; <span class="keyword">extends</span> Region
+{
+  <span class="keyword">protected final</span> T controller;
+
+  <span class="comment">// Basic Depedency injection</span> 
+  <span class="keyword">public</span> FragmentView(<span class="type">T</span> controller)
+  {
+    <span class="keyword">this</span>.controller = controller;
+  }
+
+  <span class="comment">
+  /**
+   * This method construct the View of the Fragment, this is present in every Fragment
+   * */
+   </span>
+  <span class="keyword"> protected abstract void</span> createView();
+}</code></pre>
+
+        <p>This class use a generic type T that allow me to set any View Model to any View. Note that at the beginning, this generic type was narrowed down to an interface called ViewModel. However, quickly it became clear that if I kept that implementation, I would not respect the L and the I from the SOLID.</p>
+        <p>It would not have respected the Liskov Substitution, I could not have switched my ViewModel interface without breaking everything (foreshadowing)</p>
+        <p>It would not have respected the Interface Segregation principle because this interface had to know every contract of every ViewModel, the implementation had to be done this way:</p>
+<pre><code>
+<span class="keyword">interface</span> <span class="class">ViewModel</span> <span class="keyword">extends</span> ViewModelA, ViewModelB...
+{}</code></pre>
+        <p>Which is a very bad implementation, since it would add more coupling and break everything at the first refactor</p>
+        <p>Based on this architecture I created the very first component : A ChoiceBox. It goal is to let the user chose a programming language from a predefined list.</p>
+        <ol>
+          <li>Create the View</li>
+<pre><code><span class="keyword">package</span> com.visualizer.View.Fragment;
+
+<span class="keyword">import</span> java.lang.Exception;
+
+<span class="keyword">import</span> javafx.collections.ObservableList;
+<span class="keyword">import</span> javafx.collections.FXCollections;
+<span class="keyword">import</span> javafx.scene.control.ChoiceBox;
+<span class="keyword">import</span> javafx.scene.control.Label;
+<span class="keyword">import</span> javafx.scene.control.ToolBar;
+<span class="keyword">import</span> javafx.util.Pair;
+
+<span class="keyword">import</span> com.visualizer.Converter.PairStringConverter;
+<span class="keyword">import</span> com.visualizer.View.Fragment.FragmentView;
+<span class="keyword">import</span> com.visualizer.ViewModel.SelectorFragmentViewModel;
+
+<span class="comment">
+/**
+ * Create the SelectorFragment, which will evolve in a complete toolbar 
+ * to let user set his preferences in the software 
+ * <span class="decorator">@author</span> Yewspine
+ * */
+ </span>
+<span class="keyword">public class</span> <span class="class">SelectorFragment</span> <span class="keyword">extends</span> FragmentView&lt;<span class="class">SelectorFragmentViewModel</span>&gt; 
+{
+  <span class="keyword">private final</span> ChoiceBox&lt;Pair&lt;String, String&gt;&gt; language = <span class="keyword">new</span> ChoiceBox&lt;&gt;();
+  <span class="keyword">private final static</span> Pair&lt;String, String&gt; <span class="constant">EMPTY_PAIR</span> = <span class="keyword">new</span> Pair&lt;&gt;(<span class="string">""</span>, <span class="string">""</span>);
+
+  <span class="keyword">public</span> SelectorFragment(<span class="type">SelectorFragmentViewModel</span> viewModel)
+  {
+    <span class="function">super</span>(viewModel);
+    <span class="function">initChoice</span>();
+    <span class="function">createView</span>();
+  }
+
+  <span class="comment">
+  /**
+   * Poplate the ChoiceBox with hardcoded languages to choose from.
+   * */
+  </span>
+  <span class="keyword">private void</span> initChoice()
+  {
+    <span class="keyword">ObservableList&lt;Pair&lt;String, String&gt;&gt;</span> language_classes = FXCollections.<span class="function">observableArrayList</span>();
+    language_classes.<span class="function">addAll</span>(
+      <span class="constant">EMPTY_PAIR</span>,
+      <span class="keyword">new</span> Pair(<span class="string">"Pascal"</span>, <span class="string">"pas"</span>),
+      <span class="keyword">new</span> Pair(<span class="string">C++"</span>, <span class="string">"cpp"</span>),
+      <span class="keyword">new</span> Pair(<span class="string">"C"</span>, <span class="string">"c"</span>),
+      <span class="keyword">new</span> Pair(<span class="string">"JavaScript"</span>, <span class="string">"js"</span>),
+      <span class="keyword">new</span> Pair(<span class="string">"C#"</span>, <span class="string">"cs"</span>),
+      <span class="keyword">new</span> Pair(<span class="string">"Java"</span>, <span class="string">"java"</span>),
+      <span class="keyword">new</span> Pair(<span class="string">"Haskell"</span>, <span class="string">"hs"</span>),
+      <span class="keyword">new</span> Pair(<span class="string">"Python"</span>, <span class="string">"py"</span>),
+      <span class="keyword">new</span> Pair(<span class="string">"PHP"</span>, <span class="string">"php"</span>)
+    );
+    
+    language.<span class="function">setConverter</span>(<span class="keyword">new</span> PairStringConverter()); 
+    <span class="comment">// Initialize default selection for controller and choiceBox</span>
+    language.<span class="function">setItems</span>(language_classes);
+    language.<span class="function">setValue</span>(language.<span class="function">getItems</span>().<span class="function">get</span>(<span class="integer">0</span>)); 
+  }
+
+  <span class="comment">
+  /**
+   * Create the view for the toolbar and bind the controller to it
+   * */
+  <span>
+  <span class="decorator">@Override</span>
+  <span class="keyword">protected void</span> createView()
+  {
+    <span class="keyword">try</span>
+    { 
+      Label language_label = <span class="keyword">new</span> Label(<span class="string">"Change language implementation"</span>);  
+      language.<span class="function">setOnAction</span>(event -&gt; controller.<span class="function">apply_language</span>(language.<span class="function">getValue</span>()));
+
+      ToolBar bar = <span class="keyword">new</span> ToolBar(      
+        language_label, 
+        language
+      );
+      <span class="keyword">this</span>.<span class="function">getChildren</span>().<span class="function">add</span>(bar);
+    } <span class="keyword">catch</span> ( <span class="type">Exception</span> exception )
+    {
+      exception.<span class="function">printStackTrace</span>();
+      <span class="keyword">throw</span> exception;
+    }
+  }
+}</code></pre>
+        <p>This code just create a Tool bar that contain the ChoiceBox. In the future, this box will contain parameters, the run button, the undo / redo functionnalities etc... This will be the control panel for the software</p>
+        <li>Create a Converter</li>
+        <p>Now you might want to know what this <code>language.setConverter(new PairStringConverter());</code> When dealing with Tuple in Java you sometimes need to convert them into string. This is exactly what this class does. It create a converter by Overriding the default <code>ToString()</code> and <code>fromString()</code> methods just like this:</p>
+<pre><code><span class="keyword">package</span> com.visualizer.Converter;
+
+<span class="keyword">import</span> java.lang.UnsupportedOperationException;
+<span class="keyword">import</span> javafx.util.Pair;
+<span class="keyword">import</span> javafx.util.StringConverter;
+
+<span class="comment">
+/**
+ * This class is used to convert a Pair of String to a common String.
+ * <span class="decorator">@author</span> Yewspine
+ * */
+</span>
+<span class="keyword">public class</span> <span class="class">PairStringConverter</span> <span class="keyword">extends</span> StringConverter&lt;Pair&lt;String, String&gt;&gt;
+{
+  
+  <span class="keyword">public</span> PairStringConverter()
+  {}
+
+<span class="comment">
+  /**
+   * The overriden toString() method extract the key of the pair and return it
+   * In case the pair or the key is null, an empty String is sent
+   * Personal note here, I should change this method return value 
+   * for an Optionnal&lt;String&gt;.
+   * <span class="decorator">@param</span> pair the string pair to convert to a string
+   * <span class="decorator">@return</span> If the key of the pair if the pair and the key are not <code>null</code> Else it return an empty String
+   * */
+</span>
+  <span class="decorator">@Override</span>
+  <span class="keyword">public String</span> toString(<span class="type">Pair&lt;String, String&gt;</span> pair)
+  {
+    <span class="keyword">return</span> pair != <span class="constant">null</span> &amp;&amp; pair.<span class="function">getKey</span>() != <span class="constant">null</span> ? pair.<span class="function">getKey</span>() : <span class="string">""</span>; 
+  }
+
+<span class="comment">
+  /**
+   * Normally it should create a Pair&lt;String, String&gt; from a 
+   * String However in this context, this is useless and wil always throw an Exception
+   * <span class="decorator">@param</span> string the String value to convert to a Pair of String 
+   * <span class="decorator">@throws</span> UnsupportedOperationException Java internal Exception meaning this operation is not supported and that will never be
+   * <span class="decorator">@return</span> while the signature assure it would return a Pair&lt;String, String&gt; this will never happens
+   * */
+</span>
+  <span class="decorator">@Override</span>
+  <span class="keyword">public Pair&lt;String, String&gt;</span> fromString(<span class="type">String</span> string)
+  {
+    <span class="keyword">throw new</span> UnsupportedOperationException(<span class="string">"Operation not supported in this context"</span>);
+  }
+}</code></pre>
+        <p>As you can see, this converter has a very specific behaviour when Overriding <code>fromString</code> It always throw an Exception, which is normal, I won't build a Pair from a String. But since the StringConveter class expect this method to be overriden, so I override it to only throw exception.</p>
+        <li>Create the View Model</li>
+        <p>Now that the converter case is done, another piece of code interest us</p>
+<pre><code>language.<span class="function">setOnAction</span>(event -&gt; controller.<span class="function">apply_language</span>(language.<span class="function">getValue</span>()));</code></pre>
+        <p>This code call the controller, which replace the generic Type T. To define it, I separated two files an Interface defining the contract this View Model will follow and implement this logic. Some may argue it is against Liskov Substitution principle. But for me this is an extra safety. It keeps you from editing without reason the View Model thus leading to a violation of the Open-Closed principle that states a class should be open for expension but closed for modification.</p>
+        <p>I will show the interface implementation only for this ViewModel since... It will be pretty much the same for each ViewModel that will come after</p>
+<pre><code><span class="keyword">package</span> com.visualizer.Model;
+
+<span class="keyword">import</span> javafx.util.Pair;
+
+<span class="keyword">public interface</span> <span class="class">LanguageSelector</span>
+{
+  <span class="keyword">void</span> apply_language(<span class="type">Pair&lt;String, String&gt;</span> selected_language);
+}</code></pre>
+        <p>As you can see, there is not much to talk about, so without further ado let's jump to the ViewModel</p>
+<pre><code><span class="keyword">package</span> com.visualizer.ViewModel;
+
+<span class="keyword">import</span> javafx.util.Pair;
+
+<span class="keyword">import</span> com.visualizer.Model.LanguageSelector;
+
+<span class="keyword">public class</span> <span class="class">SelectorFragmentViewModel</span> <span class="keyword">implements</span> LanguageSelector 
+{  
+  <span class="decorator">@Override</span>
+  <span class="keyword">public void</span> apply_language(<span class="type">Pair&lt;String, String&gt;</span> selected_language)
+  {
+    System.out.<span class="function">println</span>(selected_language.<span class="function">getValue</span>());
+  }
+}</code></pre>
+        <p>The first implementation was rudimentary, for debugging purpose I was just printing the selected value, since this value was not used yet anyway. Here I do not use the <code>toString()</code> because it will return the key, not the value stored in the Pair.</p>  
+        <li>Wrap the Fragment in a main view</li>
+        <p>Now that this is done, I just had to creates a new View which will not inherit from fragment, since it's not one. It will extends a BorderPane because after comparing, it is easier to arrange and place those Fragments in BordePane since it already divide the screen for us in distinctive parts ( e.g. Top, Bottom. Center, etc... ).</p>
+<pre><code><span class="keyword">"package</span> com.visualizer.View;
+
+<span class="keyword">import</span> javafx.scene.layout.BorderPane;
+
+<span class="keyword">import</span> com.visualizer.ViewModel.SelectorFragmentViewModel;
+<span class="keyword">import</span> com.visualizer.View.Fragment.SelectorFragment;
+
+<span class="keyword">public class</span> <span class="class">MainView</span> <span class="keyword">extends</span> BorderPane
+{
+  <span class="keyword">public</span> MainView()
+  {
+    SelectorFragmentViewModel selector_fragment_controller = <span class="keyword">new</span> SelectorFragmentViewModel();
+    SelectorFragment selectorFragment = <span class="fragment">new</span> SelectorFragment(selector_fragment_controller);
+    this.<span class="function">setTop</span>(selectorFragment);
+  }
+}</code></pre>
+
+        <p>Finally, in the App.java I just have to remove the Debug Label for the actual MainView.</p>
+<pre><code><span class="keyword">public void</span> start(<span class="type">Stage</span> stage) <span class="keyword">throws</span> Exception 
+{ 
+  MainView view = <span class="keyword">new</span> MainView();
+  Scene scene = new Scene(view, <span class="integer">800</span>, <span class="integer">600</span>); 
+  stage.<span class="function">setScene</span>(scene);
+  stage.<span class="function">show</span>();
+}</code></pre>
+
+        <p>And this is done. The basic implementation for the the first view, fragment and Controller is done. And this is with a free mind I can continue to work on this project.</p>
+
+        </ol>
         </article>
         <article id="#last">
         <a aria-label="Navigate to the first blog post" href="#first">Bring me to first post !</a>
