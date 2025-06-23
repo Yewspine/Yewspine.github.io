@@ -14,6 +14,32 @@ nav
   font-size: 20px;
 }
 
+details summary
+{
+  border-bottom: 5px solid #fff;
+}
+
+dt 
+{
+  padding: 15px;
+}
+
+ul.glossary
+{
+  padding: 0;
+}
+
+dl, ul.glossary li 
+{
+  border: 1px solid #fff;
+  list-style-type: none;
+}
+
+dl > dt {
+  font-weight: normal;
+  font-style: oblique;
+}
+
 @media (max-width: 768px) 
 {
   nav 

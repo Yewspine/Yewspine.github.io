@@ -1,0 +1,17 @@
+#javafx-graph
+{
+  filter: grayscale(100%);
+}
+
+.UML-diagram
+{
+  background-color: #fff;
+  width: 75%;
+  height: 75%;
+}
+
+figcaption
+{
+  font-style: italic;
+  max-width: var(--max-paragraph-width);
+}

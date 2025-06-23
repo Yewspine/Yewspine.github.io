@@ -4,12 +4,12 @@
     <title>Yewspine's website - Visualizer</title>
     <meta charset="UTF-8">
     <link rel="preload" href="../../style/highlight.css" as="style">
-    
+
     <link rel="stylesheet" href="../../style/main.css">
+    <link rel="stylesheet" href="../../style/images.css">
     <link rel="stylesheet" href="../../style/summary.css">
     <link rel="stylesheet" href="../../style/arianne.css">
-    <link rel="stylesheet" href="../../style/footer.css">
-    <link rel="stylesheet" href="../../style/table.css">
+    <link rel="stylesheet" href="../../style/footer.css"> 
     <link rel="stylesheet" href="../../style/highlight.css">
     <link rel="stylesheet" href="../../style/responsive.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
@@ -18,10 +18,10 @@
     <header class="arianne" id="top">
       <ul>
         <li><a href="../../index.html">Main view</a></li> 
-        <svg alt="" xmlns="http://www.w3.org/2000/svg" width="20" height="15" viewBox="0 0 384 512">
+        <li><svg xmlns="http://www.w3.org/2000/svg" width="20" height="15" viewBox="0 0 384 512">
           <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
           <path d="M3.4 81.7c-7.9 15.8-1.5 35 14.3 42.9L280.5 256 17.7 387.4C1.9 395.3-4.5 414.5 3.4 430.3s27.1 22.2 42.9 14.3l320-160c10.8-5.4 17.7-16.5 17.7-28.6s-6.8-23.2-17.7-28.6l-320-160c-15.8-7.9-35-1.5-42.9 14.3z" fill="white" stroke="white"/>
-        </svg>
+          </svg></li>
         <li><a href=#>Visualizer</a></li>
       </ul>
     </header>
@@ -33,37 +33,38 @@
         <li>
           <a target="_self" href="#timeline">Timeline</a>
           <ul>
-            <li><a target="_self" href="#first">The beginning</a></li>
+            <li><a target="_self" href="#first">Why this Stack ?</a></li>
+            <li><a target="_self" href="#beginning">The Beginning</a></li>
             <li><a target="_self" href="#architecture">MVVM Implementation</a></li>
-            <li><a target="_self" href="#reflection">The Reflection Algorithm</a></li>
           </ul>
         </li>
+        <li><a target="_self" href="#source">Sources</a></li>
         <li><a target="_self" href="#legal">Legal Notice</a></li>
       </ol>
     </nav>
     <main>
       <h1>Algorithm Visualizer</h1>
-      <section id="introduction">
+      <article id="introduction">
         <h2>Introduction</h2> 
-        <article>
-          <p>This project is born from the need I had when I discovered algorithm, the need to see the algorithm actions to understand them. At the time there was not that much of options to pick from. Even if today, there is plenty of those, <em>especially the great <a target="_blank" rel="noopener" href="https://tobinatore.github.io">Algovis.io (Open in a new tab)</a></em>. So my goal is to provide a complete educational tool, portable for almost every platform and efficient. Getting inspiration from the smooth animation of the YouTuber <a target="_blank" href="https://www.youtube.com/@CodeAesthetic">CodeAesthetic ( Open Youtube in a new tab )</a>.</p>
-          <p>Regularly, after each major updates, I will update this blog page. Stay tuned, I will create a RSS feed when I have time.
-          <p>Posts appear in chronological order. <a aria-label="Navigate to the latest post" href="#last">Take me to the last update !</a></p>
-        </article>
-      </section>
+        <p>This project is born from the need I had when I discovered algorithm, the need to see the algorithm actions to understand them. At the time there weren't much options out there. Today however, there is plenty of those, <em>especially the great <a target="_blank" rel="noopener" href="https://tobinatore.github.io">Algovis.io (Open in a new tab)</a></em>. So my goal here is to provide a complete, portable and efficient educational tool. Getting inspiration from the smooth animation showed in the videos of the YouTuber <a target="_blank" href="https://www.youtube.com/@CodeAesthetic">CodeAesthetic (Open Youtube in a new tab)</a>.</p>
+        <p>I will update this blog page after every major updates. Stay tuned, I will create a RSS feed when I have time.</p>
+        <p>Posts appear in chronological order. <a aria-label="Navigate to the latest post" href="#last">Take me to the latest update !</a></p>
+      </article>
       <hr>
-      <section id="timeline">
+      <article id="timeline">
         <h2>Timeline</h2>
-        <article id=#first>
-          <h3>The Beginning</h3>
-          <p>After thinking about it, I chose to start this project using Java. I like Java, for its robusteness and power. Furthermore, since it relies on JVM to compiles to bytecodes, it makes it portable for almost any machines. Unless I use some OS-specific instruction, which might not happen since I do not plan to manipulate some Windows Register or MacOS-exclusive features.</p>
-          <p>I decided to use Maven as a project manager, since I already have used it for some prior personnal projects. In addition Gradle has a lot of features I won't even need for this project, like the customization using the Groovy DSL from Gradle. This DSL is really good, but I just need to manage dependencies, therefore the POM file of Maven does exactly that. It also provides templates and downloads dependencies, which allow me to quickly hope into the project.</p>
-          <p>As for the coding environment, I don't like IDEs, they are too much bloat and overhead to use for me. So I sticked to my good old Nvim.</p>
-          <p>The framework I decided to use is JavaFX, why JavaFX ? Because compared to Swing it is actively maintained, also its CSS-like styling makes it easier to personalise and tweak. Also, JavaFX is used in most of the internal companies software.</p>
-          <p>Other solution exists like Electron or QT. They are good, but have some drawbacks. In one hand, Electron while being based on web technologies making it more portable than JavaFX, is built using chromium tools known for their RAM and CPU consumption. In the other hand, QT use C++, which mean I have to setup a complete toolchain to target another OS. In addition, QT does not use standard C++. Thus, meaning I have to write more boilerplate code to achieve some small things, like parsing from QString to std::string to char*.</p>
-          <p>Alongside the basic <code>Jlink</code> to automatically distribute the application, <code>README.md</code> and <code>.gitignore</code> file. I pushed a basic JavaFX Project.</p>
-          <p>At the moment the main class code looked like this :</p>
-          <pre><code><span class="keyword">package</span> com.visualizer;
+        <h3>Why this stack</h3>
+        <p>After thinking about it, I chose to start this project using Java. I like Java, for its robusteness and power. Furthermore, since it relies on JVM to compiles to bytecode, it makes it portable for almost any machine. Unless I use some OS-specific instruction, which might not happen since I do not plan to manipulate some Windows Register or MacOS-exclusive features.</p>
+        <p>I decided to use Maven as a project manager, since I already have used it for some prior personnal projects. In addition Gradle has a lot of features I won't even need for this project, like the customisation using the Groovy DSL. I just need to manage dependencies, therefore the pom file of maven does exactly that. it also provides templates for most projects, and downloads dependencies, which allow me to quickly dive into the project.</p>
+        <p>As for the coding environment, i don't like IDEs, they are too much bloat and overhead to use for me. so i sticked with my good old nvim.</p>
+        <p>The framework I decided to use is JavaFX, why JavaFX ? Because compared to Swing it is actively maintained, also it CSS-like styling makes it easier to personalise and tweak. From the industry side, JavaFX is used in most of the companies internal software, making it somewhat of a standard.</p>
+        <p>Other solutions exists like Electron or Qt. They are good to some extent, but have some drawbacks. On one hand, Electron while being based on web technologies making it more portable than JavaFX, is built using Chromium tools known for their RAM and CPU consumption. On the other hand, Qt uses C++, which means I have to setup a complete toolchain to target another OS. In addition, Qt does not use standard C++. meaning I have to write more boilerplate code to achieve some small things, like parsing from <code class="inline">QString</code> to <code class="inline">std::string</code> to <code class="inline">char*</code>.</p>
+      </article>
+      <article id="beginning">
+        <h3>The Beginning</h3>
+        <p>Now that's out of the way, let's look into the project. I used the template that is generated using the <a aria-description="External Documentation" target="_blank" rel="noopener" href="https://openjfx.io/openjfx-docs/#maven">JavaFX Maven Archetype</a> generating a ready-to-run project, including an Entry point called App.java, and SystemInfo.java. As well as the module-info.java used to define the project dependencies on other modules.</p>
+        <p>Let's look at this App.java file :</p>
+        <pre><code><span class="keyword">package</span> com.visualizer;
 
 <span class="keyword">import</span> javafx.application.Application;
 <span class="keyword">import</span> javafx.scene.Scene;
@@ -73,21 +74,21 @@
 
 <span class="comment">
 /**
-* JavaFX App
+* javafx app
 */
 </span>
 <span class="keyword">public class</span> <span class="class">App</span> <span class="keyword">extends</span> Application 
 {
 
   <span class="decorator">@Override</span>
-  <span class="keyword">public void</span> start(<span class="type">Stage</span> stage) 
+  <span class="keyword">public void</span> start(<span class="type">stage</span> stage) 
   {
-    <span class="keyword">var</span> javaVersion = SystemInfo.javaVersion();
-    <span class="keyword">var</span> javafxVersion = SystemInfo.javafxVersion();
+    <span class="keyword">var</span> javaversion = Systeminfo.javaversion();
+    <span class="keyword">var</span> javafxversion = Systeminfo.javafxversion();
 
-    <span class="keyword">var</span> label = <span class="keyword">new</span> Label(<span class="string">"Hello, JavaFX "</span> + javafxVersion + <span class="string">", running on Java "</span> + javaVersion + <span class="string">"."</span>);
+    <span class="keyword">var</span> label = <span class="keyword">new</span> Label(<span class="string">"hello, javafx "</span> + javafxversion + <span class="string">", running on java "</span> + javaversion + <span class="string">"."</span>);
     <span class="keyword">var</span> scene = <span class="keyword">new</span> Scene(<span class="keyword">new</span> StackPane(label), <span class="integer">640</span>, <span class="integer">480</span>);
-    stage.setScene(scene);
+    stage.setscene(scene);
     stage.show();
   }
 
@@ -96,18 +97,42 @@
     launch();
   }
 }</code></pre>
-          <p> A standard application displaying the JavaFX and JDK version. Small spoiler, those functions are still in the latest project for debugging purpose</p>
-          <p> By default I also included the default Github Action for Maven project. It compile the project, to detect any failure in the code and check for any issues in the depedencies of the project</p>
-          <p> The Github Action script is the following:</p>
-<pre><code><span class="comment"># This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+        <p>As expected, this " application " just shows us the basics about the JavaFX architecture and data representation. This code shows that we create a Scene which contains Nodes, this Scene is then staged and showed to us. If this looks like a tree to you, this is normal because JavaFX represents and arranges its objects in a graph. This allow for better performance since the render engine can just load and render a specific set of branches that can dynamically change over time.</p>
+        <figure>
+          <img id="javafx-graph" alt="" src="../../resources/images/graph.png" >
+          <figcaption>Figure 1. JavaFX Graph structure, source: <a target="_blank" href="https://fxdocs.github.io/docs/html5/">JavaFX collaborative docs</a></figcaption>
+        </figure>
+        <p>As depicted in the above image, JavaFX has is own way to name his nodes. Since I will refer to those name a lot, let's sum it up :</p>
+        <details>
+          <summary>Glossary</summary>
+          <dl>
+            <ul class="glossary">
+              <li>
+                <dt id="root-node">Root Node</dt>
+                <dd>The Root Node is the only node that does not have a parent and is directly contained by a scene</dd>
+              </li>
+              <li>
+                <dt id="branch-node">Branch Node</dt>
+                <dd>The Branch Node is a Node having childrens. They can be Leaf Nodes or Branch Nodes too.</dd>
+              </li>
+              <li>
+                <dt id="leaf-node">Leaf Node</dt>
+                <dd>A Leaf Node is a Node that does not have Childrens. Its parent can be Branch Nodes or the Root Node</dd>
+              </li>
+            </ul>
+          </dl>
+        </details>
+        <p> After a push, I checked GitHub reccomendation for a Maven project. I find out a clean GitHub Action runner. It compile the project, automate the tests to detect any failure in the code. For people building from source, it's a good indicator if they want to clone the latest commit or a previous one. This action should send the code to dependabot. If there is a risk of supply chain attack or a vulnerability in one of the dependencies, I will be warned about it.</p>
+        <p> the github action script is the following:</p>
+        <pre><code><span class="comment"># this workflow will build a java project with maven, and cache/restore any dependencies to improve the workflow execution time
+# for more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
 
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
+# this workflow uses actions that are not certified by github.
+# they are provided by a third-party and are governed by
 # separate terms of service, privacy policy, and support
 # documentation.</span>
 
-<span class="key">name:</span> <span class="string">Java CI with Maven</span>
+<span class="key">name:</span> <span class="string">java ci with maven</span>
 
 <span class="key">on:
   push:
@@ -122,134 +147,113 @@
 
     <span class="key">steps:
     - uses:</span> <span class="string">actions/checkout@v4</span>
-    <span class="key">- name:</span> <span class="string">Set up JDK 22</span>
+    <span class="key">- name:</span> <span class="string">set up jdk 22</span>
       <span class="key">uses:</span> <span class="string">actions/setup-java@v4</span>
       <span class="key">with:
         java-version:</span> <span class="string">'22'</span>
         <span class="key">distribution:</span> <span class="string">'temurin'</span>
         <span class="key">cache:</span> <span class="string">maven</span>
-    <span class="key">- name:</span> <span class="string">Build with Maven</span>
-      <span class="key">run:</span> <span class="string">mvn -B package --file pom.xml</span>
+    <span class="key">- name:</span> <span class="string">build with maven</span>
+      <span class="key">run:</span> <span class="string">mvn -b package --file pom.xml</span>
 
-    <span class="comment"># Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive</span>
-    <span class="key">- name:</span> <span class="string">Update dependency graph</span>
+    <span class="comment"># optional: uploads the full dependency graph to github to improve the quality of dependabot alerts this repository can receive</span>
+    <span class="key">- name:</span> <span class="string">update dependency graph</span>
       <span class="key">uses:</span> <span class="string">advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6</span></code></pre>
-          <p>However, since the Github Action kept throwing an error during the upload of the dependency graph, I commented this part out and created a branch to debug this workflow.</p>
-        </article>
-        <hr>
-        <article id="architecture">
-          <h3>MVVM Implementation</h3>
-          <p>In this series of commits, I implemented the Model View View Model Pattern Design in my code, using the SOLID principles. This design pattern consist of having a View that renders the UI, and a separate working logic handled by a single ViewModel.</p>
-          <p>The main differences between the MVC ( Model View Controller ) and MVVM reside in the entry point and the relationship between the UI and the working part.</p>
-          <p>Here is a table to see them:</p>
-          <table>
-            <tr>
-              <td></td>
-              <th>MVVM</th>
-              <th>MVC</th>
-            </tr>
-            <tr>
-              <th>Entry Point</th>
-              <td>View</td>
-              <td>Controller</td>
-            </tr>
-            <tr>
-              <th>Relationship</th>
-              <td>One viewModel can be bound to multiple view</td>
-              <td>One controller can be bind to multiple Views</td>
-            </tr>
-            <tr>
-              <th>Testing</th>
-              <td>Decoupling made it easier to isolate and test it</td>
-              <td>Can't be easily isolated and tested</td>
-            </tr>
-          </table>
-          <p>With that in minde, I created a generic abstract class defining a <code>FragmentView</code>. This class represent a View and it ViewModel bind to it, it is implemented as it:</p>
-<pre></code><span class="keyword">package</span> com.visualizer.View.Fragment;
+        <p>however, since the github action kept throwing an error during the upload of the dependency graph, i commented this part out and created a branch to debug this workflow later on.</p>
+      </article>
+      <hr>
+      <article id="architecture">
+        <h3>MVVM implementation</h3>
+        <p>Reading through the documentation, I found out that it is recommended to use the <abbr title="Model View ViewModel">MVVM</abbr> design pattern when using JavaFX Which makes sense; MVVM separates the UI from the Business Layer and the data access, this decoupling makes the unit testing easier but first of all, it helps reducing the error induced when modifying the Model or the styles. And it explains the choice of a CSS-like styling approach. Since this styling code is unaware of the View, modifying it won't induce side effects at all... Well, it will if this is ugly, but this will not cause errors in the business logic. And if it does... What monstrosity did you come up with exactly ? Jokes aside, MVVM isolates and decouple much the different stages of the UI and the business logic compared to <abbr title="Model View Controller">MVC</abbr> for example, making it prone for <abbr title="SOLID is a set of programming principles for OOP and a mnemetic abbreviation, each letters refers to a principle.">SOLID</abbr> compliance and testability.</p>
+        <p>With that in mind, I structured my projects around 5 main folders which are the following:</p>
+        <uL>
+          <li>View: Where <abbr title="User Interface">UI</abbr> Controls Resides</li>
+          <li>ViewModel: Contains the Screen State and the UI Logic.</li>
+          <li>Model: Function Call to business logic and data access</li>
+          <li>DomainObject: UI-Neutral transfer Object</li>
+          <li>Converter: Helper Class for ViewModel to Model communication</li>
+          </ul>
+          <p>When I first started this project, I had a misconception of this pattern. As I understood it, the Model object was supposed to contain every Abstract class, enums or interfaces, while the DomainObject was supposed to contain the Business Logic. I Also falsly thought that View folder should contain everything UI-related. This is why during first version the <code class="inline">View</code> abstract class was inside View folder.</p>
+          <p>To be honest, those <em>bugs</em> are the worst, they are insidious, doesn't trigger any errors, doesn't prevent the code from working. However, it gives you a lot of headache when you try to explain your architecture, or to write about your project. And guess what ? It was while writing those articles and talking about it to a close friend that it struck me. " My design pattern sucks, I should read further about it ". And I did, one of the best decision of my life.</p>
+          <p>But how do I plan to implement that now ? Well luckily I made a small <abbr title="Unified Model Language">UML</abbr> class Diagram, a tool that is not used as often as it should be. If what you are doing is stupid, you'll know it by looking at the Diagram, the diagram is also a good indicator to check if your solution is too complex. Generally, if you strugle to find the good rules to express your architecture, or if Visual Paradigm needs 5 minutes to loads your saved project... Maybe there is a problem with your architecture.</p>
+          <figure>
+            <img class="UML-diagram" alt="" src="../../resources/images/SelectorView.png">
+            <figcaption>Figure 2. The UML diagram representing the implementation of the first component.</figcaption> 
+            <p>The <code class="inline">SelectorView</code> class is a generalization of the generic abstract class <code class="inline">View</code>. The T type of this class is destined to bind to the <code class="inline">SelectorViewModel</code> class which implements the <code class="inline">SelectorService</code> interface. As I am using a Pair of String, a JavaFX object representing tuples, I added another dependency for the SelectorView. The <code class="inline">PairStringConverter</code>, making sure the display looks good in the ChoiceBox.</p>
+          </figure>
+          <p>Ok, this UML is beautiful and all, but what does it means in terms of code ? Let's see the <code class="inline">View.java</code> file:</p>
+          <pre><code><span class="keyword">package</span> com.visualizer.Model;
 
 <span class="keyword">import</span> javafx.scene.layout.Region;
 
 <span class="comment">
 /**
- * Abstract class defining a FragmentViewm The T generic type attend the Controller
- * interface, For granularity and because of Interface Segregation, the T type is not 
- * narrowed to a particular Controller Interface.
- * <span class="decorator">@param</span> &lt;T&gt; The Controller class for the Fragment
- * <span class="decorator">@author</span> Yewspine
- * *
-</span>
-<span class="keyword"> public abstract class</span> <span class="class">FragmentView</span>&lt;T&gt; <span class="keyword">extends</span> Region
-{
-  <span class="keyword">protected final</span> T controller;
-
-  <span class="comment">// Basic Depedency injection</span> 
-  <span class="keyword">public</span> FragmentView(<span class="type">T</span> controller)
-  {
-    <span class="keyword">this</span>.controller = controller;
-  }
-
-  <span class="comment">
-  /**
-   * This method construct the View of the Fragment, this is present in every Fragment
-   * */
-   </span>
-  <span class="keyword"> protected abstract void</span> createView();
-}</code></pre>
-
-        <p>This class use a generic type T that allow me to set any View Model to any View. Note that at the beginning, this generic type was narrowed down to an interface called ViewModel. However, quickly it became clear that if I kept that implementation, I would not respect the L and the I from the SOLID.</p>
-        <p>It would not have respected the Liskov Substitution, I could not have switched my ViewModel interface without breaking everything (foreshadowing)</p>
-        <p>It would not have respected the Interface Segregation principle because this interface had to know every contract of every ViewModel, the implementation had to be done this way:</p>
-<pre><code>
-<span class="keyword">interface</span> <span class="class">ViewModel</span> <span class="keyword">extends</span> ViewModelA, ViewModelB...
-{}</code></pre>
-        <p>Which is a very bad implementation, since it would add more coupling and break everything at the first refactor</p>
-        <p>Based on this architecture I created the very first component : A ChoiceBox. It goal is to let the user chose a programming language from a predefined list.</p>
-        <ol>
-          <li>Create the View</li>
-<pre><code><span class="keyword">package</span> com.visualizer.View.Fragment;
-
-<span class="keyword">import</span> java.lang.Exception;
-
-<span class="keyword">import</span> javafx.collections.ObservableList;
-<span class="keyword">import</span> javafx.collections.FXCollections;
-<span class="keyword">import</span> javafx.scene.control.ChoiceBox;
-<span class="keyword">import</span> javafx.scene.control.Label;
-<span class="keyword">import</span> javafx.scene.control.ToolBar;
-<span class="keyword">import</span> javafx.util.Pair;
-
-<span class="keyword">import</span> com.visualizer.Converter.PairStringConverter;
-<span class="keyword">import</span> com.visualizer.View.Fragment.FragmentView;
-<span class="keyword">import</span> com.visualizer.ViewModel.SelectorFragmentViewModel;
-
-<span class="comment">
-/**
- * Create the SelectorFragment, which will evolve in a complete toolbar 
- * to let user set his preferences in the software 
+ * Abstract class defining a View. The &lt;T&gt; generic type can be a viewModel. 
+ * For granularity and because of Interface Segregation, the T type is not narrowed to a particular Controller Interface.
+ * <span class="decorator">@param</span> &lt;T&gt; The ViewModel class instance.
  * <span class="decorator">@author</span> Yewspine
  * */
- </span>
-<span class="keyword">public class</span> <span class="class">SelectorFragment</span> <span class="keyword">extends</span> FragmentView&lt;<span class="class">SelectorFragmentViewModel</span>&gt; 
+</span>
+<span class="keyword">public abstract class</span> <span class="class">View</span>&lt;T&gt; <span class="keyword">extends</span> Region
 {
-  <span class="keyword">private final</span> ChoiceBox&lt;Pair&lt;String, String&gt;&gt; language = <span class="keyword">new</span> ChoiceBox&lt;&gt;();
-  <span class="keyword">private final static</span> Pair&lt;String, String&gt; <span class="constant">EMPTY_PAIR</span> = <span class="keyword">new</span> Pair&lt;&gt;(<span class="string">""</span>, <span class="string">""</span>);
+  <span class="keyword">protected final</span> T viewModel;
 
-  <span class="keyword">public</span> SelectorFragment(<span class="type">SelectorFragmentViewModel</span> viewModel)
+  <span class="keyword">public</span> View(<span class="type">T</span> viewModel)
   {
-    <span class="function">super</span>(viewModel);
-    <span class="function">initChoice</span>();
-    <span class="function">createView</span>();
+    <span class="keyword">this</span>.viewModel = viewModel;
   }
 
-  <span class="comment">
+<span class="comment">
   /**
-   * Poplate the ChoiceBox with hardcoded languages to choose from.
+   * This method construct the UI of the View
    * */
   </span>
-  <span class="keyword">private void</span> initChoice()
+  <span class="keyword">protected abstract</span> void createView();
+
+}
+          </code></pre>
+          <p>This class uses a generic type T that allow me to set any viewModel to any view. Note : for one of the implementation I've done, this generic type was narrowed down to an interface called ViewModel. However, after thinking about it. It quickly became clear that if I kept that implementation, I would not respect the <abbr title="Liskov substitution principle, the L in SOLID">L</abbr> and the <abbr title="Interface segregation principle, the I in SOLID">I</abbr> from the SOLID.</p>
+          <p>It would not have respected the Liskov substitution, because I could not have switched my viewModel class for another kind of class without breaking everything</p>
+          <p>It would not have respected the Interface segregation principle because for an interface <code class="inline">ViewModel</code> to exists, it should have known every contract of every ViewModel, the implementation had to be done this way:</p>
+          <pre><code>
+<span class="keyword">interface</span> <span class="class">ViewModel</span> <span class="keyword">extends</span> ViewModelA, ViewModelB...
+{}</code></pre>
+          <p>Which is a very bad implementation, since it would add more coupling and friction. Breaking everything at the first refactor and making it hard to test or mock.</p>
+          <p>Based on this <code class="inline">View</code> class. I created the SelectorView. Its purpose is to let the user chose a programming language from a predefined List.</p>
+          <ol>
+            <li>Create the ViewModel</li>
+            <p>Wait who's put this error here ? Answer, no one. We are doing <abbr title="Model View ViewModel">MVVM</abbr> here, and the entry point of the MVVM pattern is the ViewModel. So while you can starts with the View, this is way easier to starts with the ViewModel and only then create the View.
+
+            <pre><code><span class="keyword">package</span> com.visualizer.ViewModel.Selector;
+
+<span class="keyword">import</span> java.lang.IllegalStateException;
+
+<span class="keyword">import</span> javafx.beans.property.SimpleObjectProperty;
+<span class="keyword">import</span> javafx.beans.property.SimpleStringProperty;
+<span class="keyword">import</span> javafx.beans.property.StringProperty;
+<span class="keyword">import</span> javafx.beans.property.ObjectProperty;
+<span class="keyword">import</span> javafx.collections.ObservableList;
+<span class="keyword">import</span> javafx.collections.FXCollections;
+<span class="keyword">import</span> javafx.util.Pair;
+
+<span class="keyword">import</span> com.visualizer.ViewModel.Contract.SelectorService;
+
+<span class="keyword">public class</span> <span class="class">SelectorViewModel</span> <span class="keyword">implements</span> SelectorService
+{
+
+  <span class="keyword">private final</span> ObservableList&lt;Pair&lt;String, String&gt;&gt; choices = FXCollections.observableArrayList();
+  <span class="keyword">private final</span> ObjectProperty&lt;Pair&lt;String, String&gt;&gt; selectedPair = <span class="keyword">new</span> SimpleObjectProperty&lt;&gt;();
+  <span class="keyword">private final</span> StringProperty labelText = <span class="keyword">new</span> SimpleStringProperty("");
+
+  <span class="keyword">public</span> SelectorViewModel()
   {
-    <span class="keyword">ObservableList&lt;Pair&lt;String, String&gt;&gt;</span> language_classes = FXCollections.<span class="function">observableArrayList</span>();
-    language_classes.<span class="function">addAll</span>(
-      <span class="constant">EMPTY_PAIR</span>,
+    populateChoiceBox();
+    setupListener();
+  }
+
+  <span class="keyword">private</span> void populateChoiceBox()
+  {
+    choices.<span class="function">addAll</span>(
       <span class="keyword">new</span> Pair(<span class="string">"Pascal"</span>, <span class="string">"pas"</span>),
       <span class="keyword">new</span> Pair(<span class="string">"C++"</span>, <span class="string">"cpp"</span>),
       <span class="keyword">new</span> Pair(<span class="string">"C"</span>, <span class="string">"c"</span>),
@@ -260,42 +264,56 @@
       <span class="keyword">new</span> Pair(<span class="string">"Python"</span>, <span class="string">"py"</span>),
       <span class="keyword">new</span> Pair(<span class="string">"PHP"</span>, <span class="string">"php"</span>)
     );
-    
-    language.<span class="function">setConverter</span>(<span class="keyword">new</span> PairStringConverter()); 
-    <span class="comment">// Initialize default selection for controller and choiceBox</span>
-    language.<span class="function">setItems</span>(language_classes);
-    language.<span class="function">setValue</span>(language.<span class="function">getItems</span>().<span class="function">get</span>(<span class="integer">0</span>)); 
   }
 
-  <span class="comment">
-  /**
-   * Create the view for the toolbar and bind the controller to it
-   * */
-  <span>
-  <span class="decorator">@Override</span>
-  <span class="keyword">protected void</span> createView()
+  <span class="keyword">private</span> void setupListener()
   {
-    <span class="keyword">try</span>
-    { 
-      Label language_label = <span class="keyword">new</span> Label(<span class="string">"Change language implementation"</span>);  
-      language.<span class="function">setOnAction</span>(event -&gt; controller.<span class="function">apply_language</span>(language.<span class="function">getValue</span>()));
+    selectedPair.<span class="function">addListener</span>((obs, old, fresh) <span aria-label="Lambda operator">-&gt;</span> {
+      <span class="keyword">if</span> ( fresh == <span class="constant">null</span> )
+      {
+        <span class="keyword">throw new</span> IllegalStateException();
+      }
 
-      ToolBar bar = <span class="keyword">new</span> ToolBar(      
-        language_label, 
-        language
-      );
-      <span class="keyword">this</span>.<span class="function">getChildren</span>().<span class="function">add</span>(bar);
-    } <span class="keyword">catch</span> ( <span class="type">Exception</span> exception )
-    {
-      exception.<span class="function">printStackTrace</span>();
-      <span class="keyword">throw</span> exception;
-    }
+      labelText.<span class="function">set</span>(String.<span class="function">format</span>(<span class="string">"%s Selected, language extension is : %s"</span>, fresh.<span class="function">getKey</span>(), fresh.<span class="function">getValue</span>()));
+    });
+  }
+
+  <span class="decorator">@Override</span>
+  <span class="keyword">public</span> ObservableList&lt;Pair&lt;String, String&gt;&gt; getChoices()
+  {
+    <span class="keyword">return</span> choices;
+  }
+
+  <span class="decorator">@Override</span>
+  <span class="keyword">public</span> ObjectProperty&lt;Pair&lt;String, String&gt;&gt; selectedPairProperty()
+  {
+    <span class="keyword">return</span> selectedPair;
+  }
+
+  <span class="keyword">public</span> StringProperty labelTextProperty()
+  {
+    <span class="keyword">return</span> labelText;
   }
 }</code></pre>
-        <p>This code just create a Tool bar that contain the ChoiceBox. In the future, this box will contain parameters, the run button, the undo / redo functionnalities etc... This will be the control panel for the software</p>
-        <li>Create a Converter</li>
-        <p>Now you might want to know what this <code>language.setConverter(new PairStringConverter());</code> When dealing with Tuple in Java you sometimes need to convert them into string. This is exactly what this class does. It create a converter by Overriding the default <code>ToString()</code> and <code>fromString()</code> methods just like this:</p>
-<pre><code><span class="keyword">package</span> com.visualizer.Converter;
+            <p>Now you might ask, why is there an array of Pair sitting in on of the the Consttructor's methods ? What is this listener stuff ? I Will respond to these questions. First of all, this array is the population of the ChoiceBox. We put this here because the population of a ChoiceBox is linked to the creation of the UI, therefore it belongs to the ViewModel. ViewModel which constructs the View based on the output of Business Layer output, while the View just display the curated informations.</p> 
+            <p>Now for the Listener. In JavaFX there is Observable Values, if you're familliar with Angular, it's almost the same concept. If you're not, have a small breakdown. When an Observable Value is changed, it triggers an event. The listener is here to listen to this event then as a response, dispatch the new value and execute some logic. Right now, each time the value changes a String text is updated. The ViewModel does not need to know about our ChoiceBox, Label, Buttons or anything, to do his work, he just need to know what kind of property it's dealing with. In our case, a String and some Pair of String, nothing more.</p>
+            <p>Now the reason it is in the constructor is quite simple, the ViewModel is the entry of the View, the listener has to be set and the ChoiceBox populated before the View is rendered, without it an update or an user action will be necessary to trigger them. The other way to solve this problem would be to break the <abbr title="Model View ViewModel">MVVM</abbr> pattern and put that logic into the View. We do not want to do that because we respect MVVM here. That's why we call these two methods in the constructor.  
+            <p>I attached an interface to this ViewModel, while this is not an obligation, this is not a bad thing to do, it helps with the reusability of components and mockability for testing. This interface is the following</p>
+            <pre><code><span class="keyword">package</span> com.visualizer.ViewModel.Contract;
+
+<span class="keyword">import</span> javafx.beans.property.ObjectProperty;
+<span class="keyword">import</span> javafx.collections.ObservableList;
+<span class="keyword">import</span> javafx.util.Pair;
+
+<span class="keyword">public interface</span> SelectorService
+{
+  ObservableList&lg;Pair&lg;String, String&gt;&gt; getChoices();
+  ObjectProperty&lg;Pair&lg;String, String&gt;&gt; selectedPairProperty();
+}</code></pre>
+            <p>Let me just point that, the interface does not need to contain <strong>everything</strong> your program will ever used, this is true for every progr=m. This is also exactly what the Interface Segregation principle is about. An Interface need to know only what's necessary for it implementation. In this case what do I need ? Fundamentaly I need to return the population of all possible choices, and the currently selected value. This is the bare minimum for this interface, the rest in the <code class="inline">SelectorViewModel</code> class is just implementation detail.</p>
+            <li>Create a Converter</li>
+            <p>Now, you might want to know what this <code class="inline">PairStringAbout</code> that <code class="inline">SelectorView</code> is depending on. A converter is a special type of class that translates data from ViewModel to DomainObjects. For us we just need it to display the Key of the Pair, to do so we just need to override the default <code>tostring()</code> and <code>fromstring()</code> methods just like this:</p>
+            <pre><code><span class="keyword">package</span> com.visualizer.converter;
 
 <span class="keyword">import</span> java.lang.UnsupportedOperationException;
 <span class="keyword">import</span> javafx.util.Pair;
@@ -303,126 +321,131 @@
 
 <span class="comment">
 /**
- * This class is used to convert a Pair of String to a common String.
- * <span class="decorator">@author</span> Yewspine
+ * This class is used to convert a pair of string to a common string.
+ * <span class="decorator">@author</span> yewspine
  * */
 </span>
 <span class="keyword">public class</span> <span class="class">PairStringConverter</span> <span class="keyword">extends</span> StringConverter&lt;Pair&lt;String, String&gt;&gt;
 {
-  
-  <span class="keyword">public</span> PairStringConverter()
+
+  <span class="keyword">Public</span> PairStringConverter()
   {}
 
 <span class="comment">
   /**
-   * The overriden toString() method extract the key of the pair and return it
-   * In case the pair or the key is null, an empty String is sent
-   * Personal note here, I should change this method return value 
-   * for an Optionnal&lt;String&gt;.
-   * <span class="decorator">@param</span> pair the string pair to convert to a string
-   * <span class="decorator">@return</span> If the key of the pair if the pair and the key are not <code>null</code> Else it return an empty String
+   * The overriden tostring() method extract the key of the pair and return it
+   * in case the pair or the key is null, an empty string is sent
+   * <span class="decorator">@param</span> Pair the string pair to convert to a string
+   * <span class="decorator">@return</span> If the key of the pair if the pair and the key are not <code>null</code> else it return an empty string
    * */
 </span>
   <span class="decorator">@Override</span>
-  <span class="keyword">public String</span> toString(<span class="type">Pair&lt;String, String&gt;</span> pair)
+  <span class="keyword">Public</span> String toString(<span class="type">Pair&lt;String, String&gt;</span> pair)
   {
-    <span class="keyword">return</span> pair != <span class="constant">null</span> &amp;&amp; pair.<span class="function">getKey</span>() != <span class="constant">null</span> ? pair.<span class="function">getKey</span>() : <span class="string">""</span>; 
+    <span class="keyword">return</span> pair != <span class="constant">null</span> &amp;&amp; pair.<span class="function">getkey</span>() != <span class="constant">null</span> ? pair.<span class="function">getkey</span>() : <span class="string">""</span>; 
   }
 
 <span class="comment">
   /**
    * Normally it should create a Pair&lt;String, String&gt; from a 
-   * String However in this context, this is useless and wil always throw an Exception
-   * <span class="decorator">@param</span> string the String value to convert to a Pair of String 
-   * <span class="decorator">@throws</span> UnsupportedOperationException Java internal Exception meaning this operation is not supported and that will never be
+   * String however in this context, this is useless and wil always throw an exception
+   * <span class="decorator">@param</span> string the string value to convert to a Pair of String 
+   * <span class="decorator">@throws</span> UnsupportedOperationException java internal exception meaning this operation is not supported and that will never be
    * <span class="decorator">@return</span> while the signature assure it would return a Pair&lt;String, String&gt; this will never happens
    * */
 </span>
   <span class="decorator">@Override</span>
-  <span class="keyword">public Pair&lt;String, String&gt;</span> fromString(<span class="type">String</span> string)
+  <span class="keyword">public</span> Pair&lt;String, String&gt; fromString(<span class="type">string</span> String)
   {
     <span class="keyword">throw new</span> UnsupportedOperationException(<span class="string">"Operation not supported in this context"</span>);
   }
 }</code></pre>
-        <p>As you can see, this converter has a very specific behaviour when Overriding <code>fromString</code> It always throw an Exception, which is normal, I won't build a Pair from a String. But since the StringConveter class expect this method to be overriden, so I override it to only throw exception.</p>
-        <li>Create the View Model</li>
-        <p>Now that the converter case is done, another piece of code interest us</p>
-<pre><code>language.<span class="function">setOnAction</span>(event -&gt; controller.<span class="function">apply_language</span>(language.<span class="function">getValue</span>()));</code></pre>
-        <p>This code call the controller, which replace the generic Type T. To define it, I separated two files an Interface defining the contract this View Model will follow and implement this logic. Some may argue it is against Liskov Substitution principle. But for me this is an extra safety. It keeps you from editing without reason the View Model thus leading to a violation of the Open-Closed principle that states a class should be open for expension but closed for modification.</p>
-        <p>I will show the interface implementation only for this ViewModel since... It will be pretty much the same for each ViewModel that will come after</p>
-<pre><code><span class="keyword">package</span> com.visualizer.Model;
+            <p>As you can see, this Converter has a very specific behaviour when Overriding <code>fromString</code>. It always throw an exception, which is normal. I won't build a pair from a string. But since the <code class="inline">StringConverter</code> class expect this method to be Overriden, I override it to only throw exception with an error message.</p>
+            <li>Create the View</li>
+            <p>now that the Converter case is done, this is time to assemble every pieces into one... The View and I have to admit... Once you wrote the dependant code, this is just way easier to write this part, you just have to do lego with the code:</p>
+            <pre><code><span class="keyword">package</span> com.visualizer.View.Selector;
 
+<span class="keyword">import</span> javafx.collections.ObservableList;
+<span class="keyword">import</span> javafx.collections.FXCollections;
+<span class="keyword">import</span> javafx.scene.control.ChoiceBox;
+<span class="keyword">import</span> javafx.scene.control.Label;
+<span class="keyword">import</span> javafx.scene.control.ToolBar;
 <span class="keyword">import</span> javafx.util.Pair;
 
-<span class="keyword">public interface</span> <span class="class">LanguageSelector</span>
+<span class="keyword">import</span> com.visualizer.Converter.PairStringConverter;
+<span class="keyword">import</span> com.visualizer.Model.View;
+<span class="keyword">import</span> com.visualizer.ViewModel.Selector.SelectorViewModel;
+
+<span class="keyword">public class</span> <span class="class">SelectorView</span> <span class="keyword">extends</span> View<SelectorViewModel>
 {
-  <span class="keyword">void</span> apply_language(<span class="type">Pair&lt;String, String&gt;</span> selected_language);
+    <span class="keyword">private final</span> ChoiceBox&lt;Pair&lt;String, String&gt;&gt; language = <span class="keyword">new</span> ChoiceBox&lt;&gt;();
+    <span class="keyword">private final</span> Label textLabel = <span class="keyword">new</span> Label(<span class="string">""</span>);
+
+    <span class="keyword">public</span> SelectorView(<span class="type">SelectorViewModel</span> viewModel)
+    {
+      <span class="keyword">super</span>(viewModel);
+      createView();
+    }
+
+    <span class="decorator">@Override</span>
+    <span class="keyword">protected</span> void createView()
+    {
+      language.<span class="function">setItems</span>(viewModel.<span class="function">getChoices</span>());
+      Pair&lt;String, String&gt; defaultLanguage = language.<span class="function">getItems</span>().<span class="function">get</span>(<span class="integer">0</span>);
+      language.<span class="function">setValue</span>(defaultLanguage);
+
+      viewModel.<span class="function">selectedPairProperty</span>().<span class="function">bind</span>(language.<span class="function">getSelectionModel</span>().<span class="function">selectedItemProperty</span>());
+
+      textLabel.<span class="function">textProperty</span>().<span class="function">bind</span>(viewModel.<span class="function">labelTextProperty</span>());
+
+      language.<span class="function">setConverter</span>(<span class="keyword">new</span> PairStringConverter());
+
+      <span class="keyword">ToolBar</span> tools = <span class="keyword">new</span> ToolBar(
+        language,
+        textLabel
+      );
+
+      <span class="keyword">this</span>.<span class="function">getChildren</span>().<span class="function">add</span>(tools);
+    }
 }</code></pre>
-        <p>As you can see, there is not much to talk about, so without further ado let's jump to the ViewModel</p>
-<pre><code><span class="keyword">package</span> com.visualizer.ViewModel;
-
-<span class="keyword">import</span> javafx.util.Pair;
-
-<span class="keyword">import</span> com.visualizer.Model.LanguageSelector;
-
-<span class="keyword">public class</span> <span class="class">SelectorFragmentViewModel</span> <span class="keyword">implements</span> LanguageSelector 
-{  
-  <span class="decorator">@Override</span>
-  <span class="keyword">public void</span> apply_language(<span class="type">Pair&lt;String, String&gt;</span> selected_language)
-  {
-    System.out.<span class="function">println</span>(selected_language.<span class="function">getValue</span>());
-  }
-}</code></pre>
-        <p>The first implementation was rudimentary, for debugging purpose I was just printing the selected value, since this value was not used yet anyway. Here I do not use the <code>toString()</code> because it will return the key, not the value stored in the Pair.</p>  
-        <li>Wrap the Fragment in a main view</li>
-        <p>Now that this is done, I just had to creates a new View which will not inherit from fragment, since it's not one. It will extends a BorderPane because after comparing, it is easier to arrange and place those Fragments in BordePane since it already divide the screen for us in distinctive parts ( e.g. Top, Bottom. Center, etc... ).</p>
-<pre><code><span class="keyword">"package</span> com.visualizer.View;
-
-<span class="keyword">import</span> javafx.scene.layout.BorderPane;
-
-<span class="keyword">import</span> com.visualizer.ViewModel.SelectorFragmentViewModel;
-<span class="keyword">import</span> com.visualizer.View.Fragment.SelectorFragment;
-
-<span class="keyword">public class</span> <span class="class">MainView</span> <span class="keyword">extends</span> BorderPane
-{
-  <span class="keyword">public</span> MainView()
-  {
-    SelectorFragmentViewModel selector_fragment_controller = <span class="keyword">new</span> SelectorFragmentViewModel();
-    SelectorFragment selectorFragment = <span class="fragment">new</span> SelectorFragment(selector_fragment_controller);
-    this.<span class="function">setTop</span>(selectorFragment);
-  }
-}</code></pre>
-
-        <p>Finally, in the App.java I just have to remove the Debug Label for the actual MainView.</p>
-<pre><code><span class="keyword">public void</span> start(<span class="type">Stage</span> stage) <span class="keyword">throws</span> Exception 
+            <p>Now this one can be tricky. But this is really simple. The View construct what's visible on the UI. First, we fill the ChoiceBox using the <code class="inline">getChoices</code> method defined earlier in the VIewModel. Then, while generally for the default choice an empty pair of string is chosen, I prefer to set the first items of the ChoiceBox as the default one. In this case Pascal lang is the default.</p>
+            <p>The bind instruction, this instruction allow an one-to-one communication between a component and an Observable. This is at this moment we detail which element will be receive update from the observer and which one the ViewModel will actually listen to the changes.</p>
+            <p>Then I set the converter for the ChoiceBox. Normally for a <code class="inline">Pair&lt;String, String&gt;</code> the Stringified output wille be something like : <code class="inline">"Key=pair"</code> However, we do not want that in our ChoiceBox, that's why we wrote the Converter to Override this behaviour and just output the key.</p>
+            <p>To render this, we just have to add those two leaf nodes into a branch node, in my case a <code class="inline">ToolBar</code> and added it to the parent branch Node it will belong to.</p>
+            <p>Finally, in the app.java I just have to remove the debug label for this actual View.</p>
+            <pre><code><span class="keyword">public void</span> start(<span class="type">Stage</span> stage) <span class="keyword">throws</span> Exception 
 { 
-  MainView view = <span class="keyword">new</span> MainView();
+  var view = <span class="keyword">new</span> SelectorView(new SelectorViewModel());
   Scene scene = new Scene(view, <span class="integer">800</span>, <span class="integer">600</span>); 
   stage.<span class="function">setScene</span>(scene);
   stage.<span class="function">show</span>();
 }</code></pre>
 
-        <p>And this is done. The basic implementation for the the first view, fragment and Controller is done. And this is with a free mind I can continue to work on this project.</p>
-
-        </ol>
-        </article>
-        <hr>
-        <article id="#reflection">
-          <h3>The Reflection Algorithm</h3>
-          <p></p>
-        </article>
-        <article id="#last">
-        <a aria-label="Navigate to the first blog post" href="#first">Bring me to first post !</a>
-        </article>
-      </section>
+            <p>And this is done. The basic implementation for the the first view is done. We have a good project structure, a relatively SOLID approach, so I can continue to work on this project the mind free.</p>
+          </ol>
+      </article>
+      <hr>
+      <article id="last">
+        <a aria-label="navigate to the first blog post" href="#timeline">bring me to first post !</a>
+      </article>
     </main>
-  </body>
-  <footer>
-    <section id="legal">
-      <p>This website does not track you, does not collect your data, does not use any cookies, only use strictly necessary JavaScript snippet.</p>
-      <p>This website has been made by Yewspine, a human being. Meaning NO AI, LLM, GPT, etc has been used while making this website.</p>
-      <p>This website <a target="_blank" rel="noopener" href="https://github.com/Yewspine/Yewspine.github.io">source code</a> and content is under the <a target="_blank" rel="noopener" href=https://creativecommons.org/publicdomain/zero/1.0/deed.en>CC0-1.0 License</a></p>
+    <hr>
+    <section id="source">
+      <h4>Sources</h4>
+      <a target="_blank" href="https://fxdocs.github.io/docs/html5">JavaFX collaborative Documentation</a>
+      <br>
+      <a target="_blank" href="https://openjfx.io/">JavaFX official Documentation</a>  
+      <br>
+      <a target="_blank" href="https://openjfx.io/javadoc/24/index.html">JavaFX JavaDoc</a>
+      <br><br>
     </section>
-    <a target="_top" href="#top">Jump to top</a>
-  </footer>
+    <footer>
+      <section id="legal">
+        <p>This website does not track you, does not collect your data, does not use any cookies and only use strictly necessary javascript snippet.</p>
+        <p>This website has been made by Yewspine, a human being. meaning no AI, LLM, GPT, etc has been used while making this website.</p>
+        <p>This website <a target="_blank" rel="noopener" href="https://github.com/yewspine/yewspine.github.io">source code</a> and content are under the <a target="_blank" rel="noopener" href=https://creativecommons.org/publicdomain/zero/1.0/deed.en>CC0-1.0 license</a></p>
+      </section>
+      <a target="_top" href="#top">Jump to top</a>
+    </footer>
+  </body>
 </html>

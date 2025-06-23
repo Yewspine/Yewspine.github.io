@@ -6,6 +6,14 @@ pre {
   font-size: var(--code-font-size);
 }
 
+code.inline 
+{
+  font-family: "fia code", monospace,
+  font-size: var(--code-font-size);
+  background-color: #343434;
+  padding: .125rem .25rem;
+}
+
 pre code {
   display: inline; 
   margin: 0;

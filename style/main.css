@@ -49,3 +49,8 @@ a:visited
   color: var(--visited-link-color);
 }
 
+abbr
+{
+  font-style: oblique;
+  color: chocolate;
+}
