@@ -1,6 +1,7 @@
 User-Agent: *
 Disallow: /style
 Disallow: /script
+Disallow: /resources
 User-Agent: OAI-SearchBot
 Disallow: /
 User-Agent: GPTBot
