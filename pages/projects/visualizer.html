@@ -164,7 +164,7 @@
       <hr>
       <article id="architecture">
         <h3>MVVM implementation</h3>
-        <p>Reading through the documentation, I found out that it is recommended to use the <abbr title="Model View ViewModel">MVVM</abbr> design pattern when using JavaFX Which makes sense; MVVM separates the UI from the Business Layer and the data access, this decoupling makes the unit testing easier but first of all, it helps reducing the error induced when modifying the Model or the styles. And it explains the choice of a CSS-like styling approach. Since this styling code is unaware of the View, modifying it won't induce side effects at all... Well, it will if this is ugly, but this will not cause errors in the business logic. And if it does... What monstrosity did you come up with exactly ? Jokes aside, MVVM isolates and decouple much the different stages of the UI and the business logic compared to <abbr title="Model View Controller">MVC</abbr> for example, making it prone for <abbr title="SOLID is a set of programming principles for OOP and a mnemetic abbreviation, each letters refers to a principle.">SOLID</abbr> compliance and testability.</p>
+        <p>Reading through the documentation, I found out that it is recomended to use the <abbr title="Model View ViewModel">MVVM</abbr> design pattern when using JavaFX Which makes sense; MVVM separates the UI from the Business Layer and the data access, this decoupling makes the unit testing easier but first of all, it helps reducing the error induced when modifying the Model or the styles. And it explains the choice of a CSS-like styling approach. Since this styling code is unaware of the View, modifying it won't induce side effects at all... Well, it will if the styling is ugly, but it will not cause errors in the business logic. And if it does... What monstrosity did you come up with exactly ? Jokes aside, MVVM isolates and decouple much the different stages of the <abbr title="User Interface">UI</abbr> and the business logic compared to <abbr title="Model View Controller">MVC</abbr> for example, making it prone for <abbr title="SOLID is a set of programming principles for OOP and a mnemetic abbreviation, each letters refers to a principle.">SOLID</abbr> compliance and testability.</p>
         <p>With that in mind, I structured my projects around 5 main folders which are the following:</p>
         <ul>
           <li>View: Where <abbr title="User Interface">UI</abbr> Controls Resides</li>
@@ -173,9 +173,9 @@
           <li>DomainObject: UI-Neutral transfer Object</li>
           <li>Converter: Helper Class for ViewModel to Model communication</li>
           </ul>
-          <p>When I first started this project, I had a misconception of this pattern. As I understood it, the Model object was supposed to contain every Abstract class, enums or interfaces, while the DomainObject was supposed to contain the Business Logic. I Also falsly thought that View folder should contain everything UI-related. This is why during first version the <code class="inline">View</code> abstract class was inside View folder.</p>
-          <p>To be honest, those <em>bugs</em> are the worst, they are insidious, doesn't trigger any errors, doesn't prevent the code from working. However, it gives you a lot of headache when you try to explain your architecture, or to write about your project. And guess what ? It was while writing those articles and talking about it to a close friend that it struck me. " My design pattern sucks, I should read further about it ". And I did, one of the best decision of my life.</p>
-          <p>But how do I plan to implement that now ? Well luckily I made a small <abbr title="Unified Model Language">UML</abbr> class Diagram, a tool that is not used as often as it should be. If what you are doing is stupid, you'll know it by looking at the Diagram, the diagram is also a good indicator to check if your solution is too complex. Generally, if you strugle to find the good rules to express your architecture, or if Visual Paradigm needs 5 minutes to loads your saved project... Maybe there is a problem with your architecture.</p>
+          <p>When I first started this project, I had a misconception of this pattern. As I understood it, the Model object was supposed to contain every Abstract class, enums or interfaces, while the DomainObject was supposed to contain the Business Logic. I Also falsely thought that View folder should contain everything UI-related. This is why during first version the <code class="inline">View</code> abstract class was inside View folder.</p>
+          <p>To be honest, those <em>bugs</em> are the worst, they are insidious, don't trigger any errors, doesn't prevent the code from working. However, it gives you a lot of headache when you try to explain your architecture, or to write about your project. And guess what ? It was while writing those articles and talking about it to a close friend that it struck me. " My design pattern sucks, I should read further about it ". And I did, one of the best decision of my life.</p>
+          <p>But how do I plan to implement that now ? Well luckily I made a small <abbr title="Unified Model Language">UML</abbr> class Diagram, a tool that is not used as often as it should be. If what you are doing is stupid, you'll know it by looking at the Diagram, the diagram is also a good indicator to check if your solution is too complex. Generally, if you struggle to find the good rules to express your architecture, or if Visual Paradigm needs 5 minutes to loads your saved project... Maybe there is a problem with your architecture.</p>
           <figure>
             <img class="UML-diagram" alt="" src="../../resources/images/SelectorView.png">
             <figcaption>Figure 2. The UML diagram representing the implementation of the first component.</figcaption> 
@@ -212,7 +212,7 @@
 
 }
           </code></pre>
-          <p>This class uses a generic type T that allow me to set any viewModel to any view. Note : for one of the implementation I've done, this generic type was narrowed down to an interface called ViewModel. However, after thinking about it. It quickly became clear that if I kept that implementation, I would not respect the <abbr title="Liskov substitution principle, the L in SOLID">L</abbr> and the <abbr title="Interface segregation principle, the I in SOLID">I</abbr> from the SOLID.</p>
+          <p>This class uses a generic type T to allow binding any ViewModel to any View. In an early implementation, the generic type was narrowed down to a ViewModel interface. However, after thinking about it. It quickly became clear this particular implementation would not respect the <abbr title="Liskov substitution principle, the L in SOLID">L</abbr> and the <abbr title="Interface segregation principle, the I in SOLID">I</abbr> from the SOLID.</p>
           <p>It would not have respected the Liskov substitution, because I could not have switched my viewModel class for another kind of class without breaking everything</p>
           <p>It would not have respected the Interface segregation principle because for an interface <code class="inline">ViewModel</code> to exists, it should have known every contract of every ViewModel, the implementation had to be done this way:</p>
           <pre><code>
@@ -340,7 +340,7 @@
    * */
 </span>
   <span class="decorator">@Override</span>
-  <span class="keyword">Public</span> String toString(<span class="type">Pair&lt;String, String&gt;</span> pair)
+  <span class="keyword">public</span> String toString(<span class="type">Pair&lt;String, String&gt;</span> pair)
   {
     <span class="keyword">return</span> pair != <span class="constant">null</span> &amp;&amp; pair.<span class="function">getkey</span>() != <span class="constant">null</span> ? pair.<span class="function">getkey</span>() : <span class="string">""</span>; 
   }
@@ -348,7 +348,7 @@
 <span class="comment">
   /**
    * Normally it should create a Pair&lt;String, String&gt; from a 
-   * String however in this context, this is useless and wil always throw an exception
+   * String however in this context, this is useless and will always throw an exception
    * <span class="decorator">@param</span> string the string value to convert to a Pair of String 
    * <span class="decorator">@throws</span> UnsupportedOperationException java internal exception meaning this operation is not supported and that will never be
    * <span class="decorator">@return</span> while the signature assure it would return a Pair&lt;String, String&gt; this will never happens
@@ -410,7 +410,7 @@
 }</code></pre>
             <p>Now this one can be tricky. But this is really simple. The View construct what's visible on the UI. First, we fill the ChoiceBox using the <code class="inline">getChoices</code> method defined earlier in the VIewModel. Then, while generally for the default choice an empty pair of string is chosen, I prefer to set the first items of the ChoiceBox as the default one. In this case Pascal lang is the default.</p>
             <p>The bind instruction, this instruction allow an one-to-one communication between a component and an Observable. This is at this moment we detail which element will be receive update from the observer and which one the ViewModel will actually listen to the changes.</p>
-            <p>Then I set the converter for the ChoiceBox. Normally for a <code class="inline">Pair&lt;String, String&gt;</code> the Stringified output wille be something like : <code class="inline">"Key=pair"</code> However, we do not want that in our ChoiceBox, that's why we wrote the Converter to Override this behaviour and just output the key.</p>
+            <p>Then I set the converter for the ChoiceBox. Normally for a <code class="inline">Pair&lt;String, String&gt;</code> the Stringified output will be something like : <code class="inline">"Key=pair"</code> However, we do not want that in our ChoiceBox, that's why we wrote the Converter to Override this behaviour and just output the key.</p>
             <p>To render this, we just have to add those two leaf nodes into a branch node, in my case a <code class="inline">ToolBar</code> and added it to the parent branch Node it will belong to.</p>
             <p>Finally, in the app.java I just have to remove the debug label for this actual View.</p>
             <pre><code><span class="keyword">public void</span> start(<span class="type">Stage</span> stage) <span class="keyword">throws</span> Exception 
