@@ -166,7 +166,7 @@
         <h3>MVVM implementation</h3>
         <p>Reading through the documentation, I found out that it is recommended to use the <abbr title="Model View ViewModel">MVVM</abbr> design pattern when using JavaFX Which makes sense; MVVM separates the UI from the Business Layer and the data access, this decoupling makes the unit testing easier but first of all, it helps reducing the error induced when modifying the Model or the styles. And it explains the choice of a CSS-like styling approach. Since this styling code is unaware of the View, modifying it won't induce side effects at all... Well, it will if this is ugly, but this will not cause errors in the business logic. And if it does... What monstrosity did you come up with exactly ? Jokes aside, MVVM isolates and decouple much the different stages of the UI and the business logic compared to <abbr title="Model View Controller">MVC</abbr> for example, making it prone for <abbr title="SOLID is a set of programming principles for OOP and a mnemetic abbreviation, each letters refers to a principle.">SOLID</abbr> compliance and testability.</p>
         <p>With that in mind, I structured my projects around 5 main folders which are the following:</p>
-        <uL>
+        <ul>
           <li>View: Where <abbr title="User Interface">UI</abbr> Controls Resides</li>
           <li>ViewModel: Contains the Screen State and the UI Logic.</li>
           <li>Model: Function Call to business logic and data access</li>
@@ -307,8 +307,8 @@
 
 <span class="keyword">public interface</span> SelectorService
 {
-  ObservableList&lg;Pair&lg;String, String&gt;&gt; getChoices();
-  ObjectProperty&lg;Pair&lg;String, String&gt;&gt; selectedPairProperty();
+  ObservableList&lt;Pair&lt;String, String&gt;&gt; getChoices();
+  ObjectProperty&lt;Pair&lt;String, String&gt;&gt; selectedPairProperty();
 }</code></pre>
             <p>Let me just point that, the interface does not need to contain <strong>everything</strong> your program will ever used, this is true for every progr=m. This is also exactly what the Interface Segregation principle is about. An Interface need to know only what's necessary for it implementation. In this case what do I need ? Fundamentaly I need to return the population of all possible choices, and the currently selected value. This is the bare minimum for this interface, the rest in the <code class="inline">SelectorViewModel</code> class is just implementation detail.</p>
             <li>Create a Converter</li>
